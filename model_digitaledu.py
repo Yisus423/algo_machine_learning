@@ -65,11 +65,6 @@ def train_testing(x, y):
 
 
 
-"""
-Modelo de clasificación KNN para predecir la supervivencia en el Titanic.
-Utiliza el algoritmo K-Nearest Neighbors para clasificar si un pasajero
-sobrevivió o no basándose en sus características.
-"""
 # Carga de datos 
 df = pd.read_csv('cleaned/digitaledu_cleaned.csv')
 
