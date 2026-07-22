@@ -1,15 +1,29 @@
-import pandas as pd 
+import pandas as pd
 
 # Paso 1. Cargar y limpiar los datos
-df = pd.read_csv('data/digitaledu.csv')
+df = pd.read_csv("data/digitaledu.csv")
 df.info()
 
-df.drop(["id","bdate", "has_photo"], axis=1, inplace= True)
+# -------langs--------------------
+# Creamos la columna declared_langs
+# 1: Respondió la pregunta
+# 0: No lo hizo
+df["declared_langs"] = (df["langs"] != "False").astype(int)
 
-print("-"*40)
-print(df["occupation_type"].value_counts())
+# Creamos la columna num_langs
+# sí respondió la pregunta se aplica la lambda para obtener el num
+# si no (NaN) lo rellenamos con la mediana para no ensuciar datos
+df["num_langs"] = (
+    df["langs"]
+    .apply(lambda x: len(x.split(";")))
+    .where(df["declared_langs"] == 1)  # sí la condicion es falsa convierte a NaN
+    .fillna(1)  # la mediana de num_langs
+)
 
-print("-"*40)
+# dropeamos lo innecesario:
+df.drop(["id", "bdate", "has_photo", "langs"], axis=1, inplace=True)
+
+print("-" * 40)
 print("\nRESULTADOS")
 
 df.info()
