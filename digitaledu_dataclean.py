@@ -13,12 +13,13 @@ df["declared_langs"] = (df["langs"] != "False").astype(int)
 # Creamos la columna num_langs
 # sí respondió la pregunta se aplica la lambda para obtener el num
 # si no (NaN) lo rellenamos con la mediana para no ensuciar datos
-df["num_langs"] = (
+temp_langs = (
     df["langs"]
     .apply(lambda x: len(x.split(";")))
     .where(df["declared_langs"] == 1)  # sí la condicion es falsa convierte a NaN
-    .fillna(1)  # la mediana de num_langs
 )
+median_langs = temp_langs.median()
+df["num_langs"] = temp_langs.fillna(median_langs)
 
 # ---------education_status-------
 # convertimos los strings de education_status a 9 dummies y los concatenamos al dataframe
