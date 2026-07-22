@@ -63,6 +63,8 @@ INNECESARY_COLUMNS = [
     "occupation_type",
     "city",
     "last_seen",
+    "career_start",
+    "career_end",
 ]
 df.drop(INNECESARY_COLUMNS, axis=1, inplace=True)
 
