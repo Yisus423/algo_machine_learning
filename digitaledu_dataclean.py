@@ -59,6 +59,7 @@ INNECESARY_COLUMNS = [
     "life_main",
     "people_main",
     "education_form",
+    "occupation_name",
     "occupation_type",
     "city",
     "last_seen",
