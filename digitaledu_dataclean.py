@@ -30,6 +30,14 @@ df = pd.concat(
     [df, pd.get_dummies(df["education_form"], prefix="form", dummy_na=True)], axis=1
 )
 
+
+# ----------ocupation_type---------
+# Misma lógica... 3 dummies
+
+df = pd.concat(
+    [df, pd.get_dummies(df["occupation_type"], prefix="occ", dummy_na=True)], axis=1
+)
+
 # ---------sex--------------------
 # Convertimos los valores de 1/2 a binario (1/0)
 # simplemente le restamos 1 a todos
@@ -45,6 +53,7 @@ INNECESARY_COLUMNS = [
     "life_main",
     "people_main",
     "education_form",
+    "occupation_type",
 ]
 df.drop(INNECESARY_COLUMNS, axis=1, inplace=True)
 
