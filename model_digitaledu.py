@@ -45,21 +45,17 @@ def train_testing(x, y):
 
     print("Confusion matrix:")
 
-    """ --- Desempaquetando en las variables las 2 listas --- """
-    # la funcion confusion_matrix() retorna 2 listas con los resultados
-    positives, negatives = confusion_matrix(y_test, y_pred)
-    # Desempaquetando las 2 listas en sus pares de datos
-    true_positive, false_positive = positives
-    false_negative, true_negative = negatives
-
+    # confusion_matrix devuelve [[TN, FP], [FN, TP]]
+    # .ravel() lo aplana a [TN, FP, FN, TP]
+    tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
     print(f"""
     RESULTADOS:
     {"-" * 40}
-    TN: {true_negative} verdaderos negativos (murió y se predijo muerte)
-    TP: {true_positive} verdaderos positivos (sobrevivió y se predijo supervivencia)
+    TN: {tn} verdaderos negativos (murió y se predijo muerte)
+    TP: {tp} verdaderos positivos (sobrevivió y se predijo supervivencia)
 
-    FP: {false_positive} falsos positivos (murió y se predijo supervivencia)
-    FN: {false_negative} falsos negativos (sobrevivió y se predijo muerte)
+    FP: {fp} falsos positivos (murió y se predijo supervivencia)
+    FN: {fn} falsos negativos (sobrevivió y se predijo muerte)
     {"-" * 40}
 
     """)
