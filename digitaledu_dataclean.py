@@ -24,6 +24,11 @@ df["num_langs"] = (
 # convertimos los strings de education_status a 9 dummies y los concatenamos al dataframe
 df = pd.concat([df, pd.get_dummies(df["education_status"], prefix="edu")], axis=1)
 
+# ---------sex--------------------
+# Convertimos los valores de 1/2 a binario (1/0)
+# simplemente le restamos 1 a todos
+df["sex"] = df["sex"] - 1  # 1 = male, 0 = female
+
 # dropeamos lo innecesario:
 INNECESARY_COLUMNS = [
     "id",
