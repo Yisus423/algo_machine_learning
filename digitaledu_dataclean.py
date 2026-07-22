@@ -21,6 +21,12 @@ temp_langs = (
 median_langs = temp_langs.median()
 df["num_langs"] = temp_langs.fillna(median_langs)
 
+# ---------city--------------------
+# Creamos una nueva columna con el número de personas de la ciudad de cada persona
+city_freq = df["city"].map(df["city"].value_counts())
+mediana_city = city_freq.median()
+df["city_freq"] = city_freq.fillna(mediana_city)  # Rellenamos los NaN con la mediana
+
 # ---------education_status-------
 # convertimos los strings de education_status a 9 dummies y los concatenamos al dataframe
 df = pd.concat([df, pd.get_dummies(df["education_status"], prefix="edu")], axis=1)
@@ -34,7 +40,6 @@ df = pd.concat(
 
 # ----------ocupation_type---------
 # Misma lógica... 3 dummies
-
 df = pd.concat(
     [df, pd.get_dummies(df["occupation_type"], prefix="occ", dummy_na=True)], axis=1
 )
@@ -55,6 +60,7 @@ INNECESARY_COLUMNS = [
     "people_main",
     "education_form",
     "occupation_type",
+    "city",
 ]
 df.drop(INNECESARY_COLUMNS, axis=1, inplace=True)
 
