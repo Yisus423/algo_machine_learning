@@ -20,8 +20,12 @@ df["num_langs"] = (
     .fillna(1)  # la mediana de num_langs
 )
 
+# ---------education_status-------
+# convertimos los strings de education_status a 9 dummies y los concatenamos al dataframe
+df = pd.concat([df, pd.get_dummies(df["education_status"], prefix="edu")], axis=1)
+
 # dropeamos lo innecesario:
-df.drop(["id", "bdate", "has_photo", "langs"], axis=1, inplace=True)
+df.drop(["id", "bdate", "has_photo", "langs", "education_status"], axis=1, inplace=True)
 
 print("-" * 40)
 print("\nRESULTADOS")
