@@ -25,7 +25,8 @@ df["num_langs"] = (
 df = pd.concat([df, pd.get_dummies(df["education_status"], prefix="edu")], axis=1)
 
 # dropeamos lo innecesario:
-df.drop(["id", "bdate", "has_photo", "langs", "education_status"], axis=1, inplace=True)
+INNECESARY_COLUMNS = ["id", "bdate", "has_photo", "langs", "education_status"]
+df.drop(INNECESARY_COLUMNS, axis=1, inplace=True)
 
 print("-" * 40)
 print("\nRESULTADOS")
