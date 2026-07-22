@@ -73,4 +73,4 @@ print("\nRESULTADOS")
 
 df.info()
 # Exportando para usar el csv limpio
-df.to_csv("cleaned/digitaledu_cleaned.csv")
+df.to_csv("cleaned/digitaledu_cleaned.csv", index=False)
